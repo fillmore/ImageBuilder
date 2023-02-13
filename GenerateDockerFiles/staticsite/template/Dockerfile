@@ -4,7 +4,7 @@ LABEL maintainer="Azure App Services Container Images <appsvc-images@microsoft.c
 RUN mkdir -p /home/LogFiles /opt/startup /home/site/wwwroot \
      && echo "root:Docker!" | chpasswd \
      && echo "cd /home" >> /etc/bash.bashrc \
-     && apt-get update \  
+     && apt-get update \
      && apt-get install --yes --no-install-recommends \
       openssh-server \
       vim \
@@ -23,12 +23,13 @@ RUN mkdir -p /home/LogFiles /opt/startup /home/site/wwwroot \
 RUN rm -f /etc/ssh/sshd_config
 COPY startup /opt/startup
 COPY hostingstart.html /home/site/wwwroot
+COPY routetest.html /home/site/wwwroot
 
 # setup SSH
 COPY sshd_config /etc/ssh/
 RUN mkdir -p /home/LogFiles \
      && echo "root:Docker!" | chpasswd \
-     && echo "cd /home" >> /root/.bashrc 
+     && echo "cd /home" >> /root/.bashrc
 
 RUN mkdir -p /var/run/sshd
 
